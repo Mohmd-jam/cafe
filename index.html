@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منوی دیجیتال WEEKEND</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #657F72;
+            --primary-dark: #4A5D52;
+            --secondary: #FF9F1C;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --gray: #6C757D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Modern Header */
+        .app-bar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            border-radius: 50px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Advanced Search
+        .search-container {
+            padding: 1rem;
+            background: white;
+            position: sticky;
+            top: 80px;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-box {
+            display: flex;
+            background: var(--light);
+            border-radius: 50px;
+            overflow: hidden;
+            padding: 0.5rem 1rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            color: var(--gray);
+        } */
+
+        /* Smart Filters */
+        .filter-section {
+            padding: 1rem;
+            background: white;
+            position: sticky;
+            top: 82px;
+            z-index: 998;
+        }
+
+        .filter-scroll {
+            display: flex;
+            gap: 0.8rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-chip {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: var(--light);
+            border: none;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .filter-chip.highlight {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Modern Menu Items */
+        .menu-container {
+            padding: 1rem;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .category-section {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .category-header {
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .category-icon {
+            font-size: 1.2rem;
+        }
+
+        .menu-items {
+            padding: 0.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background: rgba(101, 127, 114, 0.05);
+        }
+
+        .item-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .item-price {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .item-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .item-tag {
+            background: rgba(101, 127, 114, 0.1);
+            color: var(--primary-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-header {
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-item-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--light);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cart-footer {
+            padding: 1rem;
+            background: var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Floating Cart */
+        .cart-btn {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--secondary);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Export Button */
+        .export-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-item {
+                flex-direction: column;
+            }
+
+            .item-image {
+                width: 100%;
+                height: 180px;
+            }
+
+            .item-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .item-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Modern App Bar -->
+    <header class="app-bar">
+        <div class="logo-container">
+            <img src="logo2.jpg" alt="لوگوی WEEKEND" class="logo-img">
+            <div class="logo-text">WEEKEND</div>
+        </div>
+    </header>
+
+    <!-- Smart Search -->
+    <!-- <div class="search-container">
+        <div class="search-box">
+            <input type="text" placeholder="جستجوی غذا یا نوشیدنی..." id="searchInput">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </div> -->
+
+    <!-- Intelligent Filters -->
+    <div class="filter-section">
+        <div class="filter-scroll">
+            <button class="filter-chip active" data-category="all">همه منو</button>
+            <button class="filter-chip" data-category="appetizers">پیش غذاها</button>
+            <button class="filter-chip highlight" data-category="specials">پیشنهاد ویژه</button>
+            <button class="filter-chip" data-category="mains">غذای اصلی</button>
+            <button class="filter-chip" data-category="hot-drinks">نوشیدنی گرم</button>
+            <button class="filter-chip" data-category="cold-drinks">نوشیدنی سرد</button>
+            <button class="filter-chip" data-category="desserts">دسرها</button>
+        </div>
+    </div>
+
+    <!-- Modern Menu Layout -->
+    <div class="menu-container">
+        <!-- Category 1 - Appetizers -->
+        <div class="category-section" data-category="appetizers">
+            <div class="category-header">
+                <div class="category-title">پیش غذاها</div>
+                <div class="category-icon"><i class="fas fa-utensils"></i></div>
+            </div>
+            <div class="menu-items">
+                <!-- Item 1 -->
+                <div class="menu-item" data-tags="vegetarian cold">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                        alt="سالاد سزار" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div class="item-title">سالاد سزار</div>
+                            <div class="item-price">45,000 تومان</div>
+                        </div>
+                        <div class="item-desc">کاهو رومی، سس سزار اختصاصی، پنیر پارمسان، کروتون</div>
+                        <div class="item-footer">
+                            <div class="item-tags">
+                                <span class="item-tag">گیاهی</span>
+                                <span class="item-tag">سرد</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="action-btn add-to-cart"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="menu-item" data-tags="hot special">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                        alt="سوپ قارچ" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div class="item-title">سوپ قارچ</div>
+                            <div class="item-price">35,000 تومان</div>
+                        </div>
+                        <div class="item-desc">قارچ تازه، خامه، پیاز کاراملی شده، نان تست</div>
+                        <div class="item-footer">
+                            <div class="item-tags">
+                                <span class="item-tag">گرم</span>
+                                <span class="item-tag highlight">پیشنهاد ویژه</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="action-btn add-to-cart"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 2 - Hot Drinks -->
+        <div class="category-section" data-category="hot-drinks">
+            <div class="category-header">
+                <div class="category-title">نوشیدنی های گرم</div>
+                <div class="category-icon"><i class="fas fa-coffee"></i></div>
+            </div>
+            <div class="menu-items">
+                <!-- Item 1 -->
+                <div class="menu-item" data-tags="caffeine">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                        alt="اسپرسو" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div class="item-title">اسپرسو</div>
+                            <div class="item-price">25,000 تومان</div>
+                        </div>
+                        <div class="item-desc">قهوه اسپرسوی خالص با غلظت بالا</div>
+                        <div class="item-footer">
+                            <div class="item-tags">
+                                <span class="item-tag">کافئین بالا</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="action-btn add-to-cart"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="menu-item" data-tags="popular">
+                    <img src="https://images.unsplash.com/photo-1534685785745-60a2cea0ec34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                        alt="لاته" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div class="item-title">لاته</div>
+                            <div class="item-price">32,000 تومان</div>
+                        </div>
+                        <div class="item-desc">اسپرسو با شیر بخار داده شده و فوم شیر</div>
+                        <div class="item-footer">
+                            <div class="item-tags">
+                                <span class="item-tag">محبوب</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="action-btn add-to-cart"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add more categories as needed -->
+    </div>
+
+    <!-- Floating Cart Button -->
+    <button class="cart-btn" id="cartButton">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>سبد خرید شما</h3>
+                <button class="close-btn" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-footer">
+                <button class="export-btn" id="exportOrder">ذخیره سفارش</button>
+                <div id="totalPrice">جمع کل: 0 تومان</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Cart functionality
+            const cart = [];
+            const cartButton = document.getElementById('cartButton');
+            const cartModal = document.getElementById('cartModal');
+            const closeCart = document.getElementById('closeCart');
+            const cartItems = document.getElementById('cartItems');
+            const cartBadge = document.getElementById('cartBadge');
+            const exportBtn = document.getElementById('exportOrder');
+            const totalPrice = document.getElementById('totalPrice');
+
+            // Filter functionality
+            const filterChips = document.querySelectorAll('.filter-chip');
+            const categorySections = document.querySelectorAll('.category-section');
+            const searchInput = document.getElementById('searchInput');
+
+            // Add to cart buttons
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+            // Toggle cart modal
+            cartButton.addEventListener('click', function () {
+                cartModal.style.display = 'flex';
+                renderCart();
+            });
+
+            closeCart.addEventListener('click', function () {
+                cartModal.style.display = 'none';
+            });
+
+            // Add to cart functionality
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const menuItem = this.closest('.menu-item');
+                    const itemName = menuItem.querySelector('.item-title').textContent;
+                    const itemPrice = parseInt(menuItem.querySelector('.item-price').textContent.replace(/,/g, ''));
+                    const itemImage = menuItem.querySelector('.item-image').src;
+
+                    // Check if item already in cart
+                    const existingItem = cart.find(item => item.name === itemName);
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            name: itemName,
+                            price: itemPrice,
+                            quantity: 1,
+                            image: itemImage
+                        });
+                    }
+
+                    // Update cart badge
+                    cartBadge.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+
+                    // Show feedback
+                    this.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-plus"></i>';
+                    }, 1000);
+                });
+            });
+
+            // Render cart items
+            function renderCart() {
+                cartItems.innerHTML = '';
+                let total = 0;
+
+                if (cart.length === 0) {
+                    cartItems.innerHTML = '<p style="text-align: center; padding: 2rem;">سبد خرید شما خالی است</p>';
+                    totalPrice.textContent = 'جمع کل: 0 تومان';
+                    return;
+                }
+
+                cart.forEach((item, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <div class="cart-item-info">
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                            <div>
+                                <div>${item.name}</div>
+                                <div>${item.price.toLocaleString()} تومان</div>
+                            </div>
+                        </div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn decrease" data-index="${index}">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn increase" data-index="${index}">+</button>
+                        </div>
+                    `;
+                    cartItems.appendChild(cartItem);
+
+                    total += item.price * item.quantity;
+                });
+
+                totalPrice.textContent = `جمع کل: ${total.toLocaleString()} تومان`;
+
+                // Add event listeners to quantity buttons
+                document.querySelectorAll('.decrease').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.dataset.index);
+                        if (cart[index].quantity > 1) {
+                            cart[index].quantity -= 1;
+                        } else {
+                            cart.splice(index, 1);
+                        }
+                        renderCart();
+                        cartBadge.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+                    });
+                });
+
+                document.querySelectorAll('.increase').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.dataset.index);
+                        cart[index].quantity += 1;
+                        renderCart();
+                        cartBadge.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+                    });
+                });
+            }
+
+            // Export order functionality
+            exportBtn.addEventListener('click', function () {
+                if (cart.length === 0) {
+                    alert('سبد خرید شما خالی است');
+                    return;
+                }
+
+                let orderText = 'سفارش از رستوران WEEKEND\n\n';
+                orderText += 'تاریخ: ' + new Date().toLocaleString('fa-IR') + '\n\n';
+                orderText += 'موارد سفارش:\n';
+
+                cart.forEach(item => {
+                    orderText += `- ${item.name} (${item.quantity} عدد) - ${item.price.toLocaleString()} تومان\n`;
+                });
+
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                orderText += `\nجمع کل: ${total.toLocaleString()} تومان`;
+
+                // Create a blob and download link
+                const blob = new Blob([orderText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `سفارش_WEEKEND_${new Date().toISOString().slice(0, 10)}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+
+            // Filter functionality
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', function () {
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const category = this.dataset.category;
+
+                    categorySections.forEach(section => {
+                        if (category === 'all' || section.dataset.category === category) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Search functionality
+            // searchInput.addEventListener('input', function () {
+            //     const searchTerm = this.value.toLowerCase();
+
+            //     document.querySelectorAll('.menu-item').forEach(item => {
+            //         const itemName = item.querySelector('.item-title').textContent.toLowerCase();
+            //         const itemDesc = item.querySelector('.item-desc').textContent.toLowerCase();
+
+            //         if (itemName.includes(searchTerm) || itemDesc.includes(searchTerm)) {
+            //             item.style.display = 'flex';
+            //         } else {
+            //             item.style.display = 'none';
+            //         }
+            //     });
+            // });
+        });
+    </script>
+</body>
+
+</html>
